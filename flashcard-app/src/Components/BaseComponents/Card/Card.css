@@ -1,0 +1,6 @@
+div.card-default {
+    display: flex;
+    box-shadow: 0 1px 0 #C4C6D7;
+    border-radius: 10px;
+    background-color: white;
+}

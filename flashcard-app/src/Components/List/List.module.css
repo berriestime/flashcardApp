@@ -1,0 +1,21 @@
+.title {
+    background-color: #432C83;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #230672;
+    border-bottom: none;
+}
+
+.tableRowH {
+    display: grid;
+    grid-template-columns: 5% 1fr 1fr 1fr 1fr 15%;
+    text-align: center;
+    background-color: rgb(228, 200, 245);
+}
+
+.tableCellH {
+    padding: 5px;
+    background-color: #432C83;
+    border: 1px solid #230672;
+    border-right: none;
+}
