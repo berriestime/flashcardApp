@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
-import "./Footer.css";
+import "./Footer.scss";
 
-function Footer(props) {
+const Footer = (props) => {
   return (
     <Fragment>
       <footer>
@@ -10,6 +10,6 @@ function Footer(props) {
       </footer>
     </Fragment>
   );
-}
+};
 
 export default Footer;

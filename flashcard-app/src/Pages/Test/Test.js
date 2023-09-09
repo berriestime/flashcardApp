@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 
-function Train(props) {
+const Test = (poros) => {
   return (
     <Fragment>
-      <main>TRAIN</main>
+      <main>TEST</main>
     </Fragment>
   );
-}
+};
 
-export default Train;
+export default Test;

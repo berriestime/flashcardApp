@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import styles from "./List.module.css";
+import styles from "./List.module.scss";
 import ListItem from "../ListItem/ListItem";
 
 function List() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
+  // const [copyedData, setСopyedData] = useState(null);
 
   useEffect(() => {
     fetch("./words.json")
       .then((response) => response.json())
       .then((data) => {
         setData(data);
+        // setСopyedData(data.slice());
       });
     return () => {};
   }, []);
@@ -17,6 +19,12 @@ function List() {
   if (data === null) {
     return <div>Loading...</div>;
   }
+
+  const removeElementByIndex = (index) => {
+    const updatedData = data.slice();
+    updatedData.splice(index, 1);
+    setData(updatedData);
+  };
 
   return (
     <div>
@@ -30,14 +38,12 @@ function List() {
           <div className={styles.tableCellH}>Тема</div>
           <div className={styles.tableCellH}></div>
         </div>
-        {data.map((item) => (
-          <div key={item.id}>
+        {data.map((word, index) => (
+          <div key={word.id}>
             <ListItem
-              id={item.id}
-              english={item.english}
-              transcription={item.transcription}
-              russian={item.russian}
-              tags={item.tags}
+              word={word}
+              index={index}
+              removeElementByIndex={removeElementByIndex}
             />
           </div>
         ))}

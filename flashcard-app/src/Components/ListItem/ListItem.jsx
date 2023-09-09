@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import styles from "./ListItem.module.css";
+import styles from "./ListItem.module.scss";
 
-function ListItem(props) {
+function ListItem({ word, index, removeElementByIndex }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [englishWord, setEnglishWord] = useState(props.english);
-  const [transcription, setTranscription] = useState(props.transcription);
-  const [russian, setRussian] = useState(props.russian);
-  const [tag, setTag] = useState(props.tags);
+  const [englishWord, setEnglishWord] = useState(word.english);
+  const [transcription, setTranscription] = useState(word.transcription);
+  const [russian, setRussian] = useState(word.russian);
+  const [tag, setTag] = useState(word.tags);
 
   function handleEdit() {
     setIsEditing(true);
@@ -17,10 +17,10 @@ function ListItem(props) {
   }
 
   function handleRevert() {
-    setEnglishWord(props.english);
-    setTranscription(props.transcription);
-    setRussian(props.russian);
-    setTag(props.tags);
+    setEnglishWord(word.english);
+    setTranscription(word.transcription);
+    setRussian(word.russian);
+    setTag(word.tags);
     setIsEditing(!isEditing);
   }
 
@@ -41,8 +41,8 @@ function ListItem(props) {
   };
 
   return (
-    <div className={styles.tableRowT} id={props.id}>
-      <div className={styles.tableCellT}>{props.id}</div>
+    <div className={styles.tableRowT} id={word.id}>
+      <div className={styles.tableCellT}>{word.id}</div>
       {isEditing ? (
         <input
           type="text"
@@ -98,7 +98,12 @@ function ListItem(props) {
             Отменить изменения
           </button>
         ) : (
-          <button className={styles.btn}>Удалить</button>
+          <button
+            className={styles.btn}
+            onClick={() => removeElementByIndex(index)}
+          >
+            Удалить
+          </button>
         )}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import SetModule from "../SetModule/SetModule.jsx";
+import SetModule from "../../Components/SetModule/SetModule.jsx";
 
 function Sets(props) {
   return (

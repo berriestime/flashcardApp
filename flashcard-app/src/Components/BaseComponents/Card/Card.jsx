@@ -1,8 +1,16 @@
-import React from "react";
-import "./Card.css";
+import React, { Fragment } from "react";
+import styles from "./Card.module.scss";
 
-export const Card = (props) => {
+const Card = ({ word }) => {
   return (
-    <div className={"card-default" || props.className}>{props.children}</div>
+    <Fragment>
+      <div className={styles.cardDefault}>
+        <div>{word.english}</div>
+        {/* <div>{word.russian}</div> */}
+        <button>Показать перевод</button>
+      </div>
+    </Fragment>
   );
 };
+
+export default Card;
