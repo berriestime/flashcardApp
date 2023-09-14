@@ -23,7 +23,7 @@ const Slider = () => {
       <button className={styles.btn} onClick={previousSlide}>
         Previous
       </button>
-      <Card word={words[currentIndex]} />
+      <Card word={words[currentIndex]} key={currentIndex} />
       <button className={styles.btn} onClick={nextSlide}>
         Next
       </button>

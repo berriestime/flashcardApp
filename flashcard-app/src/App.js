@@ -17,6 +17,7 @@ function App() {
             <Route exact path="/" element={<Sets />} />
             <Route path="/train" element={<TrainPage />} />
             <Route path="/test" element={<Test />} />
+            <Route path="*" element={<p>Such page does not exist!</p>} />
           </Routes>
           <Footer />
         </div>
