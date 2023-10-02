@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import styles from "./Slider.module.scss";
 import words from "./words.json";
 import Card from "./../BaseComponents/Card/Card.jsx";
 
-const Slider = ({ wordsLearnedCount, onChangeWordsLearnedCount }) => {
+const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -18,21 +18,32 @@ const Slider = ({ wordsLearnedCount, onChangeWordsLearnedCount }) => {
     );
   };
 
+  const [learntWords, setLearntWords] = useState(0);
+
+  const learnWord = (idx) => {
+    if (words[idx].learned) return;
+    words[idx].learned = true;
+    setLearntWords(learntWords + 1);
+  };
+
   return (
-    <div className={styles.container}>
-      <button className={styles.btn} onClick={previousSlide}>
-        Previous
-      </button>
-      <Card
-        word={words[currentIndex]}
-        key={currentIndex}
-        wordsLearnedCount={wordsLearnedCount}
-        onChangeWordsLearnedCount={onChangeWordsLearnedCount}
-      />
-      <button className={styles.btn} onClick={nextSlide}>
-        Next
-      </button>
-    </div>
+    <Fragment>
+      <div className={styles.container}>
+        <button className={styles.btn} onClick={previousSlide}>
+          Previous
+        </button>
+        <Card
+          word={words[currentIndex]}
+          key={currentIndex}
+          idx={currentIndex}
+          onTranslate={learnWord}
+        />
+        <button className={styles.btn} onClick={nextSlide}>
+          Next
+        </button>
+      </div>
+      <div>Выучено {learntWords}</div>
+    </Fragment>
   );
 };
 

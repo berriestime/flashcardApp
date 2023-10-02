@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useRef, useEffect } from "react";
 import styles from "./Card.module.scss";
 
-const Card = ({ word, wordsLearnedCount, onChangeWordsLearnedCount }) => {
+const Card = ({ word, idx, onTranslate }) => {
   const ref = useRef(null);
   useEffect(() => {
     // Устанавливаем фокус на блок при монтировании компонента
@@ -10,7 +10,7 @@ const Card = ({ word, wordsLearnedCount, onChangeWordsLearnedCount }) => {
   const [translate, setTranslate] = useState(false);
   const translation = () => {
     setTranslate(!translate);
-    onChangeWordsLearnedCount(wordsLearnedCount + 1);
+    onTranslate(idx);
   };
 
   const text = translate ? word.russian : word.english;
