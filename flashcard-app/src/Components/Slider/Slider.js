@@ -3,7 +3,7 @@ import styles from "./Slider.module.scss";
 import words from "./words.json";
 import Card from "./../BaseComponents/Card/Card.jsx";
 
-const Slider = () => {
+const Slider = ({ wordsLearnedCount, onChangeWordsLearnedCount }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -23,7 +23,12 @@ const Slider = () => {
       <button className={styles.btn} onClick={previousSlide}>
         Previous
       </button>
-      <Card word={words[currentIndex]} key={currentIndex} />
+      <Card
+        word={words[currentIndex]}
+        key={currentIndex}
+        wordsLearnedCount={wordsLearnedCount}
+        onChangeWordsLearnedCount={onChangeWordsLearnedCount}
+      />
       <button className={styles.btn} onClick={nextSlide}>
         Next
       </button>
