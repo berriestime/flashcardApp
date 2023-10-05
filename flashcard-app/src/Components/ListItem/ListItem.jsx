@@ -16,6 +16,7 @@ function ListItem({ word, index, removeElementByIndex }) {
   function handleSave(e) {
     e.preventDefault();
     setIsEditing(false);
+    setError("");
     console.log({ englishWord, transcription, russian, tag });
   }
 
