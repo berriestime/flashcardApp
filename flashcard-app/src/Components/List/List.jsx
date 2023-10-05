@@ -4,14 +4,12 @@ import ListItem from "../ListItem/ListItem";
 
 function List() {
   const [data, setData] = useState([]);
-  // const [copyedData, setСopyedData] = useState(null);
 
   useEffect(() => {
     fetch("./words.json")
       .then((response) => response.json())
       .then((data) => {
         setData(data);
-        // setСopyedData(data.slice());
       });
     return () => {};
   }, []);
