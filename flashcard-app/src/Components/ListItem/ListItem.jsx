@@ -7,6 +7,7 @@ function ListItem({ word, index, removeElementByIndex }) {
   const [transcription, setTranscription] = useState(word.transcription);
   const [russian, setRussian] = useState(word.russian);
   const [tag, setTag] = useState(word.tags);
+  const [error, setError] = useState("");
 
   function handleEdit() {
     setIsEditing(true);
@@ -24,6 +25,11 @@ function ListItem({ word, index, removeElementByIndex }) {
     setRussian(word.russian);
     setTag(word.tags);
     setIsEditing(!isEditing);
+    setNameValid(true);
+    setTranscriptionValid(true);
+    setRussianValid(true);
+    setTagValid(true);
+    setError("");
   }
 
   const [nameValid, setNameValid] = useState(true);
@@ -38,21 +44,33 @@ function ListItem({ word, index, removeElementByIndex }) {
    */
   const handleNameChange = (e) => {
     setNameValid(Boolean(e.target.value.trim()));
+    if (e.target.value.trim() === "") {
+      setError("Поле не может быть пустым");
+    }
     setEnglishWord(e.target.value);
   };
 
   const handleTranscriptionChange = (e) => {
     setTranscriptionValid(Boolean(e.target.value.trim()));
+    if (e.target.value.trim() === "") {
+      setError("Поле не может быть пустым");
+    }
     setTranscription(e.target.value);
   };
 
   const handleRussianChange = (e) => {
     setRussianValid(Boolean(e.target.value.trim()));
+    if (e.target.value.trim() === "") {
+      setError("Поле не может быть пустым");
+    }
     setRussian(e.target.value);
   };
 
   const handleTagChange = (e) => {
     setTagValid(Boolean(e.target.value.trim()));
+    if (e.target.value.trim() === "") {
+      setError("Поле не может быть пустым");
+    }
     setTag(e.target.value);
   };
 
@@ -126,6 +144,7 @@ function ListItem({ word, index, removeElementByIndex }) {
           )}
         </div>
       </div>
+      {error && <p>{error}</p>}
     </form>
   );
 }
