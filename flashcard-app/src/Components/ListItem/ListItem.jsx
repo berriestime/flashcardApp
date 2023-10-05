@@ -10,6 +10,7 @@ function ListItem({ word, index, removeElementByIndex }) {
 
   function handleEdit() {
     setIsEditing(true);
+    console.log({ englishWord, transcription, russian, tag });
   }
 
   function handleSave() {
