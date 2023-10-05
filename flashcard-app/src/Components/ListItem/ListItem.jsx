@@ -10,11 +10,12 @@ function ListItem({ word, index, removeElementByIndex }) {
 
   function handleEdit() {
     setIsEditing(true);
-    console.log({ englishWord, transcription, russian, tag });
   }
 
-  function handleSave() {
+  function handleSave(e) {
+    e.preventDefault();
     setIsEditing(false);
+    console.log({ englishWord, transcription, russian, tag });
   }
 
   function handleRevert() {
@@ -56,78 +57,76 @@ function ListItem({ word, index, removeElementByIndex }) {
   };
 
   return (
-    <div className={styles.tableRowT} id={word.id}>
-      <div className={styles.tableCellT}>{word.id}</div>
-      <input
-        className={[
-          styles.tableCellT,
-          !nameValid && styles["highlighted-error"],
-        ].join(" ")}
-        disabled={!isEditing}
-        onChange={handleNameChange}
-        type="text"
-        value={englishWord}
-      />
-      <input
-        className={[
-          styles.tableCellT,
-          !transcriptionValid && styles["highlighted-error"],
-        ].join(" ")}
-        disabled={!isEditing}
-        onChange={handleTranscriptionChange}
-        type="text"
-        value={transcription}
-      />
-      <input
-        type="text"
-        value={russian}
-        className={[
-          styles.tableCellT,
-          !russianValid && styles["highlighted-error"],
-        ].join(" ")}
-        onChange={handleRussianChange}
-        disabled={!isEditing}
-      />
-      <input
-        type="text"
-        value={tag}
-        className={[
-          styles.tableCellT,
-          !tagValid && styles["highlighted-error"],
-        ].join(" ")}
-        onChange={handleTagChange}
-        disabled={!isEditing}
-      />
-      <div className={styles.tableCellT}>
-        {isEditing && (
-          <>
-            <button
-              className={styles.btn}
-              onClick={handleSave}
-              disabled={!canSave}
-            >
-              Сохранить
-            </button>
-            <button className={styles.btn} onClick={handleRevert}>
-              Отменить изменения
-            </button>
-          </>
-        )}
-        {!isEditing && (
-          <>
-            <button className={styles.btn} onClick={handleEdit}>
-              Изменить
-            </button>
-            <button
-              className={styles.btn}
-              onClick={() => removeElementByIndex(index)}
-            >
-              Удалить
-            </button>
-          </>
-        )}
+    <form onSubmit={handleSave}>
+      <div className={styles.tableRowT} id={word.id}>
+        <div className={styles.tableCellT}>{word.id}</div>
+        <input
+          className={[
+            styles.tableCellT,
+            !nameValid && styles["highlighted-error"],
+          ].join(" ")}
+          disabled={!isEditing}
+          onChange={handleNameChange}
+          type="text"
+          value={englishWord}
+        />
+        <input
+          className={[
+            styles.tableCellT,
+            !transcriptionValid && styles["highlighted-error"],
+          ].join(" ")}
+          disabled={!isEditing}
+          onChange={handleTranscriptionChange}
+          type="text"
+          value={transcription}
+        />
+        <input
+          type="text"
+          value={russian}
+          className={[
+            styles.tableCellT,
+            !russianValid && styles["highlighted-error"],
+          ].join(" ")}
+          onChange={handleRussianChange}
+          disabled={!isEditing}
+        />
+        <input
+          type="text"
+          value={tag}
+          className={[
+            styles.tableCellT,
+            !tagValid && styles["highlighted-error"],
+          ].join(" ")}
+          onChange={handleTagChange}
+          disabled={!isEditing}
+        />
+        <div className={styles.tableCellT}>
+          {isEditing && (
+            <>
+              <button type="submit" className={styles.btn} disabled={!canSave}>
+                Сохранить
+              </button>
+              <button className={styles.btn} onClick={handleRevert}>
+                Отменить изменения
+              </button>
+            </>
+          )}
+          {!isEditing && (
+            <>
+              <button className={styles.btn} onClick={handleEdit}>
+                Изменить
+              </button>
+              <button
+                className={styles.btn}
+                onClick={() => removeElementByIndex(index)}
+              >
+                Удалить
+              </button>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </form>
   );
 }
 
