@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Footer from "./Components/Footer/Footer";
-import Header from "./Components/Header/Header";
-import Sets from "./Pages/Sets/Sets.js";
-import TrainPage from "./Pages/Train/TrainPage.js";
-import Test from "./Pages/Test/Test.js";
+import Footer from "./Components/Footer/Footer.jsx";
+import Header from "./Components/Header/Header.jsx";
+import Sets from "./Pages/Sets/Sets.jsx";
+import TrainPage from "./Pages/Train/TrainPage.jsx";
+import Test from "./Pages/Test/Test.jsx";
 
 function App() {
   return (

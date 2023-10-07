@@ -1,28 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import styles from "./List.module.scss";
 import ListItem from "../ListItem/ListItem";
+import { WordsContext } from "../../Context";
 
 function List() {
-  const [data, setData] = useState([]);
+  const { wordsApp, removeElementByIndex } = useContext(WordsContext);
 
-  useEffect(() => {
-    fetch("./words.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data);
-      });
-    return () => {};
-  }, []);
-
-  if (data === null) {
+  if (wordsApp === null) {
     return <div>Loading...</div>;
   }
-
-  const removeElementByIndex = (index) => {
-    const updatedData = data.slice();
-    updatedData.splice(index, 1);
-    setData(updatedData);
-  };
 
   return (
     <div>
@@ -36,7 +22,7 @@ function List() {
           <div className={styles.tableCellH}>Тема</div>
           <div className={styles.tableCellH}></div>
         </div>
-        {data.map((word, index) => (
+        {wordsApp.map((word, index) => (
           <div key={word.id}>
             <ListItem
               word={word}

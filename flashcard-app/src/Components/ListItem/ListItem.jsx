@@ -44,25 +44,63 @@ function ListItem({ word, index, removeElementByIndex }) {
    * @type {React.ChangeEventHandler<HTMLInputElement>}
    */
   const handleNameChange = (e) => {
-    setNameValid(Boolean(e.target.value.trim()));
-    if (e.target.value.trim() === "") {
-      setError("Поле не может быть пустым");
+    setNameValid(
+      Boolean(e.target.value.trim()) && isEnglishOnly(e.target.value.trim())
+    );
+    if (e.target.value.trim() === "" || !isEnglishOnly(e.target.value)) {
+      setError(
+        'Поле не может быть пустым и символы в поле "Название" должны быть латинскими!'
+      );
     }
     setEnglishWord(e.target.value);
   };
 
   const handleTranscriptionChange = (e) => {
-    setTranscriptionValid(Boolean(e.target.value.trim()));
-    if (e.target.value.trim() === "") {
-      setError("Поле не может быть пустым");
+    setTranscriptionValid(
+      Boolean(e.target.value.trim()) &&
+        checkFirstAndLastChar(e.target.value.trim())
+    );
+    if (
+      e.target.value.trim() === "" ||
+      !checkFirstAndLastChar(e.target.value.trim())
+    ) {
+      setError(
+        "Поле не может быть пустым, первый символ должен быть '[', а последний ']'"
+      );
     }
     setTranscription(e.target.value);
   };
 
+  const isEnglishOnly = (str) => {
+    const regex = /^[a-zA-Z]+$/;
+    return regex.test(str);
+  };
+
+  const checkFirstAndLastChar = (str) => {
+    let firstChar = str.charAt(0);
+    let lastChar = str.charAt(str.length - 1);
+    if (firstChar !== "[") {
+      return;
+    }
+    if (lastChar !== "]") {
+      return;
+    }
+    return true;
+  };
+
+  const checkCyrillic = (str) => {
+    var pattern = /^[а-яА-Я\s]+$/;
+    return pattern.test(str);
+  };
+
   const handleRussianChange = (e) => {
-    setRussianValid(Boolean(e.target.value.trim()));
-    if (e.target.value.trim() === "") {
-      setError("Поле не может быть пустым");
+    setRussianValid(
+      Boolean(e.target.value.trim()) && checkCyrillic(e.target.value.trim())
+    );
+    if (e.target.value.trim() === "" || !checkCyrillic(e.target.value.trim())) {
+      setError(
+        "Поле не может быть пустым и символы в поле 'Перевод' должны быть латинскими!"
+      );
     }
     setRussian(e.target.value);
   };
@@ -145,7 +183,7 @@ function ListItem({ word, index, removeElementByIndex }) {
           )}
         </div>
       </div>
-      {error && <p>{error}</p>}
+      {error && !canSave && <p>{error}</p>}
     </form>
   );
 }
